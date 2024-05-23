@@ -19,7 +19,7 @@ public class DefaultClientService implements ClientService {
   private final UserRepository userRepository;
 
   public Page<ClientDTO> searchClients(SearchCriteriaDTO searchCriteriaDTO, Pageable pageable) {
-    Specification<User> specification = Specification
+    var specification = Specification
       .where(UserSpecifications.dateOfBirthAfter(searchCriteriaDTO.getDateOfBirth()))
       .and(UserSpecifications.hasPhoneNumber(searchCriteriaDTO.getPhone()))
       .and(UserSpecifications.hasEmail(searchCriteriaDTO.getEmail()))
