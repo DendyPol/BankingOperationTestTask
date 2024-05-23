@@ -10,10 +10,8 @@ public interface BankAccountService {
 
   void updateBalance();
 
-  @Transactional
   void deposit(Long accountId, BigDecimal amount);
 
-  @Transactional
   void withdraw(Long accountId, BigDecimal amount);
 
   void setBalance(BankAccount account, BigDecimal balance);

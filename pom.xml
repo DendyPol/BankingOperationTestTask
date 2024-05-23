@@ -40,7 +40,6 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
             <version>3.2.5</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -71,7 +70,6 @@
             <artifactId>jedis</artifactId>
             <version>5.1.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -109,7 +107,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -126,5 +123,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
