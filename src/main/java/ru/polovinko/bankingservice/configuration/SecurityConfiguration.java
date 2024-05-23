@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.polovinko.bankingservice.security.UserDetailsServiceImpl;
+import ru.polovinko.bankingservice.security.DefaultUserDetailsService;
 import ru.polovinko.bankingservice.security.jwt.JwtAuthenticationEntryPoint;
 import ru.polovinko.bankingservice.security.jwt.JwtTokenFilter;
 
@@ -23,7 +23,7 @@ import ru.polovinko.bankingservice.security.jwt.JwtTokenFilter;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
-  private final UserDetailsServiceImpl userDetailsService;
+  private final DefaultUserDetailsService userDetailsService;
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
   private final JwtTokenFilter jwtTokenFilter;
 
@@ -34,7 +34,7 @@ public class SecurityConfiguration {
 
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+    var authenticationProvider = new DaoAuthenticationProvider();
     authenticationProvider.setUserDetailsService(userDetailsService);
     authenticationProvider.setPasswordEncoder(passwordEncoder());
     return authenticationProvider;

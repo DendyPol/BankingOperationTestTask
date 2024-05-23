@@ -23,7 +23,7 @@ public class RedisConfiguration {
 
   @Bean
   public JedisConnectionFactory jedisConnectionFactory(RedisProperties redisProperties) {
-    RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+    var configuration = new RedisStandaloneConfiguration();
     configuration.setHostName(redisProperties.getHost());
     configuration.setPort(redisProperties.getPort());
     return new JedisConnectionFactory(configuration);
@@ -33,7 +33,7 @@ public class RedisConfiguration {
     private static final String REFRESH_TOKEN_KEYSPACE = "refresh tokens";
 
     protected Iterable<KeyspaceSettings> initialConfiguration() {
-      KeyspaceSettings keyspaceSettings = new KeyspaceSettings(RefreshToken.class, REFRESH_TOKEN_KEYSPACE);
+      var keyspaceSettings = new KeyspaceSettings(RefreshToken.class, REFRESH_TOKEN_KEYSPACE);
       keyspaceSettings.setTimeToLive(refreshTokenExpiration.getSeconds());
       return Collections.singleton(keyspaceSettings);
     }

@@ -162,4 +162,45 @@ public class BankAccountServiceTest {
       () -> assertEquals(user3.getUsername(), savedAccount.getUser().getUsername())
     );
   }
+
+  @Test
+  @Transactional
+  public void testDeposit() {
+    var depositAmount = BigDecimal.valueOf(5000);
+    bankAccountService.deposit(fromAccount.getId(), depositAmount);
+    var updatedAccount = bankAccountRepository.findById(fromAccount.getId()).orElseThrow();
+    assertEquals(0, BigDecimal.valueOf(25000).compareTo(updatedAccount.getBalance()));
+  }
+
+  @Test
+  @Transactional
+  public void testWithdraw() {
+    var withdrawAmount = BigDecimal.valueOf(5000);
+    bankAccountService.withdraw(fromAccount.getId(), withdrawAmount);
+    var updatedAccount = bankAccountRepository.findById(fromAccount.getId()).orElseThrow();
+    assertEquals(0, BigDecimal.valueOf(15000).compareTo(updatedAccount.getBalance()));
+  }
+
+  @Test
+  @Transactional
+  public void testSetBalance() {
+    var newBalance = BigDecimal.valueOf(30000);
+    var account = bankAccountRepository.findById(fromAccount.getId()).orElseThrow();
+    bankAccountService.setBalance(account, newBalance);
+    var updatedAccount = bankAccountRepository.findById(fromAccount.getId()).orElseThrow();
+    assertEquals(0, BigDecimal.valueOf(30000).compareTo(updatedAccount.getBalance()));
+  }
+
+  @Test
+  @Transactional
+  public void testSetNegativeBalance() {
+    var newBalance = BigDecimal.valueOf(-500);
+    var account = bankAccountRepository.findById(fromAccount.getId()).orElseThrow();
+    var exception = assertThrows(IllegalArgumentException.class, () -> {
+      bankAccountService.setBalance(account, newBalance);
+    });
+    var expectedMessage = "Balance cannot be negative";
+    var actualMessage = exception.getMessage();
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
 }

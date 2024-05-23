@@ -11,7 +11,7 @@ import ru.polovinko.bankingservice.entity.RefreshToken;
 public class RedisExpirationEvent {
   @EventListener
   public void handleRedisExpiredEvent(RedisKeyExpiredEvent<RefreshToken> event) {
-    RefreshToken expiredRefreshToken = (RefreshToken) event.getValue();
+    var expiredRefreshToken = (RefreshToken) event.getValue();
     if (expiredRefreshToken == null) {
       throw new RuntimeException("Refresh token is null in handleRedisKeyExpiredEvent function!");
     }

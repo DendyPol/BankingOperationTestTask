@@ -24,3 +24,7 @@ app:
     secret: "someSecretKey"
     tokenExpiration: 3m
     refreshTokenExpiration: 30m
+  bankAccount:
+    balanceUpdateRate: 60000
+    maxBalanceMultiplier: 2.07
+    newBalanceMultiplier: 1.05

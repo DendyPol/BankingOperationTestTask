@@ -23,19 +23,4 @@ public class BankAccount {
   @JoinColumn(name = "user_id", nullable = false)
   @JsonIgnore
   private User user;
-
-  public void setBalance(BigDecimal balance) {
-    if (balance.compareTo(BigDecimal.ZERO) < 0) {
-      throw new IllegalArgumentException("Balance cannot be negative");
-    }
-    this.balance = balance;
-  }
-
-  public void deposit(BigDecimal amount) {
-    setBalance(this.balance.add(amount));
-  }
-
-  public void withdraw(BigDecimal amount) {
-    setBalance(this.balance.subtract(amount));
-  }
 }

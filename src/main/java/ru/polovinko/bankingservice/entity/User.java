@@ -29,9 +29,9 @@ public class User {
   @JsonIgnore
   private BankAccount bankAccount;
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<PhoneNumber> phoneNumbers = new HashSet<>();
+  private Set<PhoneNumber> phoneNumbers;
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Email> emails = new HashSet<>();
+  private Set<Email> emails;
   @Column(name = "date_of_birth", nullable = false)
   private LocalDate dateOfBirth;
   @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
