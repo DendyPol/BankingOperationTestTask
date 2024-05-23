@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class DefaultClientService implements ClientService {
   private final UserRepository userRepository;
 
+  @Override
   public Page<ClientDTO> searchClients(SearchCriteriaDTO searchCriteriaDTO, Pageable pageable) {
     var specification = Specification
       .where(UserSpecifications.dateOfBirthAfter(searchCriteriaDTO.getDateOfBirth()))

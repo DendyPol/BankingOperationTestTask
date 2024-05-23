@@ -27,6 +27,7 @@ public class DefaultContactInformationService implements ContactInformationServi
   private final UserRepository userRepository;
   private final ModelMapper modelMapper;
 
+  @Override
   public void addPhoneNumber(@NotNull @Valid PhoneNumberAddDTO dto) {
     var user = userRepository.findById(dto.getUserId())
       .orElseThrow(() -> new EntityNotFoundException("User not found!"));
@@ -38,6 +39,7 @@ public class DefaultContactInformationService implements ContactInformationServi
     phoneNumberRepository.save(newPhoneNumber);
   }
 
+  @Override
   public void addEmail(@NotNull @Valid EmailAddDTO dto) {
     var user = userRepository.findById(dto.getUserId())
       .orElseThrow(() -> new EntityNotFoundException("User not found!"));
@@ -49,6 +51,7 @@ public class DefaultContactInformationService implements ContactInformationServi
     emailRepository.save(newEmail);
   }
 
+  @Override
   public void removePhoneNumber(@NotNull @Positive PhoneNumberRemoveDTO dto) {
     var user = userRepository.findById(dto.getUserId())
       .orElseThrow(() -> new EntityNotFoundException("User not found!"));
@@ -60,6 +63,7 @@ public class DefaultContactInformationService implements ContactInformationServi
     phoneNumberRepository.delete(phoneNumber);
   }
 
+  @Override
   public void removeEmail(@NotNull @Positive EmailRemoveDTO emailRemoveDTO) {
     var user = userRepository.findById(emailRemoveDTO.getUserId())
       .orElseThrow(() -> new EntityNotFoundException("User not found!"));
